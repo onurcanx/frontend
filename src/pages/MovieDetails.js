@@ -56,7 +56,7 @@ const MovieDetails = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/auth/comments", {
+      const response = await axios.post(process.env.REACT_APP_API_URL + "/auth/comments", {
         movie_id: id,
         comment: newComment,
         user_id: user_id
