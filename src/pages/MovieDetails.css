@@ -1,0 +1,191 @@
+/* MovieDetails.js'e özel modern detay ve yorum stilleri */
+
+.movie-details-main-bg {
+  min-height: 100vh;
+  background: linear-gradient(90deg, #1a2a2f 60%, #22343c 100%);
+  padding: 40px 0;
+}
+
+.movie-details-container {
+  max-width: 1100px;
+  margin: 40px auto 0 auto;
+  background: rgb(0, 48, 77);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  display: flex;
+  gap: 36px;
+  padding: 40px 36px 36px 36px;
+  color: #fff;
+  position: relative;
+}
+
+.movie-info {
+  flex: 0 0 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #162126;
+  border-radius: 18px;
+  padding: 24px 18px 18px 18px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+}
+
+.movie-poster-large {
+  width: 220px;
+  height: 330px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+}
+
+.movie-info h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: rgb(0, 240, 255);
+  text-align: center;
+}
+
+.movie-info p {
+  font-size: 1.08rem;
+  margin: 8px 0;
+  color: #533d3d;
+  text-align: left;
+}
+
+.movie-info strong {
+  color: rgb(0, 240, 255);
+  font-weight: 600;
+}
+
+/* Yorumlar bölümü */
+.comments-section {
+  flex: 1;
+  background: #1e2d32;
+  border-radius: 18px;
+  padding: 28px 24px 18px 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.comments-section h3 {
+  color: rgb(0, 240, 255);
+  font-size: 1.3rem;
+  margin-bottom: 18px;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.comment-form textarea {
+  width: 100%;
+  min-height: 70px;
+  padding: 10px;
+  border: 1.5px solid rgb(0, 240, 255);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: #22343c;
+  color: #fff;
+  resize: vertical;
+  transition: border 0.2s;
+}
+
+.comment-form textarea:focus {
+  border: 2px solid rgb(0, 240, 255);
+  outline: none;
+}
+
+.submit-comment-btn {
+  background-color: rgb(0, 240, 255);
+  color: #1a2a2f;
+  border: none;
+  padding: 10px 7px;
+  border-radius: 8px;
+  font-size: 1.08rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.submit-comment-btn:hover {
+  background-color: rgb(0, 102, 153);
+  color: #162126;
+}
+
+.error-message {
+  color: #ff6b6b;
+  font-size: 0.98rem;
+  margin: 0 0 4px 0;
+}
+
+.comments-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.comment-item {
+  background: #22343c;
+  color: #fff;
+  padding: 12px 14px 8px 14px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  font-size: 1.01rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-item strong {
+  color: rgb(0, 240, 255);
+  font-weight: 600;
+}
+
+.comment-date {
+  color: #bdbdbd;
+  font-size: 0.92em;
+  margin-top: 2px;
+  align-self: flex-end;
+}
+
+@media (max-width: 900px) {
+  .movie-details-container {
+    flex-direction: column;
+    padding: 24px 8px;
+    gap: 24px;
+  }
+  .movie-info {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .comments-section {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .movie-details-main-bg {
+    padding: 0;
+  }
+  .movie-details-container {
+    padding: 8px 0;
+    gap: 12px;
+  }
+  .movie-info {
+    padding: 12px 4px 8px 4px;
+  }
+  .comments-section {
+    padding: 12px 4px 8px 4px;
+  }
+} 

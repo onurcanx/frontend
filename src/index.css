@@ -1,0 +1,412 @@
+/* Genel stiller */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #cfcfcf;
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar'ı etkilenmemesi için sayfa düzeni */
+.main-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+/* Başlık */
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #3d3d3d;
+  text-align: center;
+}
+
+/* Açıklama metni */
+p {
+  font-size: 14px;
+  color: #000000;
+  margin-bottom: 15px;
+}
+
+/* Input alanları */
+input {
+  width: 30%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #00304d;
+  border-radius: 5px;
+  font-size: 16px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Buton */
+button {
+  background-color: #006699;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+button:hover {
+  background-color: #00304d;
+}
+
+/* Şifremi Unuttum linki */
+.forgot-password {
+  color: #00a6f1;
+  text-decoration: none;
+  margin-left: 15px;
+  font-size: 14px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* Reset password linki */
+a {
+  color: #00a6f1;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Film Detayları Sayfası */
+.movie-details-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.movie-info {
+  width: 40%;
+}
+
+.movie-poster-large {
+  width: 30%;
+  border-radius: 10px;
+}
+
+.comments-section {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.comment-form {
+  margin-bottom: 20px;
+}
+
+.comment-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  resize: vertical;
+}
+
+.submit-comment-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit-comment-btn:hover {
+  background-color: #0056b3;
+}
+
+.comments-list {
+  list-style: none;
+  padding: 0;
+}
+
+.comment-item {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comment-date {
+  display: block;
+  font-size: 0.8em;
+  color: #666;
+  margin-top: 5px;
+}
+
+.error-message {
+  color: #dc3545;
+  margin-bottom: 10px;
+}
+
+/* Profil Sayfası Stilleri */
+.loading-container,
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  text-align: center;
+}
+
+.loading {
+  font-size: 1.2em;
+  color: #666;
+}
+
+.error {
+  color: #dc3545;
+  margin-bottom: 20px;
+  font-size: 1.1em;
+}
+
+.home-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.home-button:hover {
+  background-color: #0056b3;
+}
+
+.profile-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.profile-header h1 {
+  color: #333;
+  margin: 0;
+}
+
+.logout-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.logout-btn:hover {
+  background-color: #c82333;
+}
+
+.profile-info {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px;
+}
+
+.info-card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.info-card h2 {
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.info-item {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.label {
+  color: #666;
+  font-weight: 500;
+}
+
+.value {
+  color: #333;
+}
+
+.comments-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.comments-section h2 {
+  color: #333;
+  margin-top: 0;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.comment-card {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.movie-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.movie-poster {
+  width: 50px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.movie-title {
+  font-weight: 500;
+  color: #333;
+  display: block;
+}
+
+.movie-year {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.comment-date {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.comment-text {
+  color: #444;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.no-comments {
+  color: #666;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Modern film kartı tasarımı */
+.movie-card-modern {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 0 0 16px 0;
+}
+.movie-card-modern:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+.movie-poster-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e6e6e6;
+}
+.movie-poster-modern {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.movie-rating-circle {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  background: #222;
+  color: #ffe066;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  border: 3px solid #fff;
+  z-index: 2;
+}
+.movie-info-modern {
+  width: 100%;
+  padding: 12px 10px 0 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.movie-title-modern {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+  margin: 0 0 4px 0;
+  text-align: left;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.movie-date-modern {
+  font-size: 0.98rem;
+  color: #888;
+  margin: 0;
+  text-align: left;
+  width: 100%;
+}
