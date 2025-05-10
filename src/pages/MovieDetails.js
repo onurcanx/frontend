@@ -35,7 +35,7 @@ const MovieDetails = () => {
     console.log("ℹ️ Fetching comments for movie ID:", id); // ID'nin doğru gidip gitmediğini kontrol et
 
     try {
-      const response = await axios.get(process.env.REACT_APP_API_URL + `/auth/comments/${id}`);
+      const response = await axios.get(process.env.REACT_APP_API_URL + `/api/auth/comments/${id}`);
       setComments(response.data);
     } catch (error) {
       console.error("❌ Yorumlar alınırken hata oluştu:", error);
@@ -56,7 +56,7 @@ const MovieDetails = () => {
     }
 
     try {
-      const response = await axios.post(process.env.REACT_APP_API_URL + "/auth/comments", {
+      const response = await axios.post(process.env.REACT_APP_API_URL + "/api/auth/comments", {
         movie_id: id,
         comment: newComment,
         user_id: user_id
