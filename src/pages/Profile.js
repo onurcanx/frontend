@@ -24,7 +24,7 @@ const Profile = () => {
 
   const fetchUserData = async (userId) => {
     try {
-      const response = await axios.get(process.env.REACT_APP_API_URL + `/auth/user/${userId}`);
+      const response = await axios.get(process.env.REACT_APP_API_URL + `/api/auth/user/${userId}`);
       if (response.data) {
         setUserData(response.data);
       } else {
@@ -41,7 +41,7 @@ const Profile = () => {
   const fetchUserComments = async (userId) => {
     try {
       console.log(`Kullanıcı yorumları alınıyor (ID: ${userId})...`);
-      const response = await axios.get(process.env.REACT_APP_API_URL + `/auth/user/${userId}/comments`);
+      const response = await axios.get(process.env.REACT_APP_API_URL + `/api/auth/user/${userId}/comments`);
       
       if (!response.data) {
         throw new Error("Yorumlar alınamadı");
