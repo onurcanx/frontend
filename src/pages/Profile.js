@@ -38,6 +38,7 @@ const Profile = () => {
     }
   };
 
+  
   const fetchUserComments = async (userId) => {
     try {
       console.log(`Kullanıcı yorumları alınıyor (ID: ${userId})...`);
@@ -111,6 +112,24 @@ const Profile = () => {
     navigate("/login");
   };
 
+  const handleDeleteComment = async (commentId) => {
+    try {
+      const userId = localStorage.getItem("user_id");
+      const response = await axios.delete(
+        `${process.env.REACT_APP_API_URL}/api/auth/comments/${commentId}`,
+        { data: { user_id: userId } }
+      );
+
+      if (response.data.message === "Yorum başarıyla silindi.") {
+        // Yorumu listeden kaldır
+        setUserComments(userComments.filter(comment => comment.id !== commentId));
+      }
+    } catch (error) {
+      console.error("Yorum silinirken hata oluştu:", error);
+      setError("Yorum silinirken bir hata oluştu.");
+    }
+  };
+
   if (loading) {
     return (
       <div className="loading-container">
@@ -182,6 +201,12 @@ const Profile = () => {
                     <span className="comment-date-left">
                       {new Date(comment.created_at).toLocaleDateString("tr-TR")}
                     </span>
+                    <button 
+                      onClick={() => handleDeleteComment(comment.id)}
+                      className="delete-comment-btn"
+                    >
+                      Sil
+                    </button>
                   </div>
                 </div>
               ))}
