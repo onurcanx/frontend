@@ -157,6 +157,30 @@
   align-self: flex-end;
 }
 
+.comment-content {
+  position: relative;
+  padding-right: 60px; /* Silme butonu için yer açıyoruz */
+}
+
+.delete-comment-btn {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.delete-comment-btn:hover {
+  background-color: #cc0000;
+}
+
 @media (max-width: 900px) {
   .movie-details-container {
     flex-direction: column;
