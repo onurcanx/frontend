@@ -10,13 +10,24 @@ const MovieDetails = () => {
   const [movie, setMovie] = useState(null);
   const [comments, setComments] = useState([]); // Yorumları sakla
   const [user_id] = useState(localStorage.getItem("user_id")); // LocalStorage'dan user_id al
+  const [isAdmin, setIsAdmin] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [error, setError] = useState("");
 
   useEffect(() => {
     fetchMovieDetails();
     fetchComments();
+    checkAdminStatus();
   }, [id]);
+
+  const checkAdminStatus = async () => {
+    try {
+      const response = await axios.get(process.env.REACT_APP_API_URL + `/api/auth/user/${user_id}`);
+      setIsAdmin(response.data.is_admin);
+    } catch (error) {
+      console.error("Admin durumu kontrol edilirken hata:", error);
+    }
+  };
 
   // Film detaylarını çek
   const fetchMovieDetails = async () => {
@@ -72,6 +83,23 @@ const MovieDetails = () => {
     }
   };
 
+  const handleDeleteComment = async (commentId) => {
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_API_URL}/api/auth/comments/${commentId}`,
+        { data: { user_id: user_id } }
+      );
+
+      if (response.data.message === "Yorum başarıyla silindi.") {
+        // Yorumu listeden kaldır
+        setComments(comments.filter(comment => comment.id !== commentId));
+      }
+    } catch (error) {
+      console.error("Yorum silinirken hata oluştu:", error);
+      setError("Yorum silinirken bir hata oluştu.");
+    }
+  };
+
   if (!movie) {
     return <p>⏳ Yükleniyor...</p>;
   }
@@ -120,11 +148,21 @@ const MovieDetails = () => {
           {comments.length > 0 ? (
             comments.map((comment) => (
               <li key={comment.id} className="comment-item">
-                <strong>{comment.username || "Bilinmeyen Kullanıcı"}:</strong>{" "}
-                {comment.comment}
-                <span className="comment-date">
-                  {new Date(comment.created_at).toLocaleDateString("tr-TR")}
-                </span>
+                <div className="comment-content">
+                  <strong>{comment.username || "Bilinmeyen Kullanıcı"}:</strong>{" "}
+                  {comment.comment}
+                  <span className="comment-date">
+                    {new Date(comment.created_at).toLocaleDateString("tr-TR")}
+                  </span>
+                  {isAdmin && (
+                    <button 
+                      onClick={() => handleDeleteComment(comment.id)}
+                      className="delete-comment-btn"
+                    >
+                      Sil
+                    </button>
+                  )}
+                </div>
               </li>
             ))
           ) : (
