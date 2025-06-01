@@ -13,6 +13,9 @@ const MovieDetails = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [error, setError] = useState("");
+  const [analysis, setAnalysis] = useState(null); // Analiz sonuçları için state
+  const [isAnalyzing, setIsAnalyzing] = useState(false); // Analiz durumu için state
+
 
   useEffect(() => {
     fetchMovieDetails();
@@ -52,7 +55,19 @@ const MovieDetails = () => {
       console.error("❌ Yorumlar alınırken hata oluştu:", error);
     }
   };
-
+  const analyzeComments = async () => {
+    setIsAnalyzing(true);
+    try {
+      const response = await axios.get(`http://localhost:5000/auth/comments/analyze/${id}`);
+      setAnalysis(response.data);
+      console.log("✅ Analiz sonuçları:", response.data);
+    } catch (error) {
+      console.error("❌ Analiz sırasında hata:", error);
+      setError("Yorum analizi sırasında bir hata oluştu.");
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     
@@ -127,7 +142,51 @@ const MovieDetails = () => {
 
       {/* Sağ taraf: Yorumlar bölümü */}
       <div className="comments-section">
-        <h3>Yorumlar</h3>
+        <div className="comments-header">
+          <h3>Yorumlar</h3>
+          <button 
+            onClick={analyzeComments} 
+            className="analyze-btn"
+            disabled={isAnalyzing || comments.length === 0}
+          >
+            {isAnalyzing ? "Analiz Ediliyor..." : "Yorumları Analiz Et"}
+          </button>
+        </div>
+
+        {/* Analiz sonuçları */}
+        {analysis && analysis.status === "success" && analysis.analysis && (
+          <div className="analysis-results">
+            <h4>📊 Yorum Analizi</h4>
+            <div className="analysis-stats">
+              <p>📝 Toplam Yorum: {analysis.analysis.total_comments}</p>
+              <p>😊 Pozitif Yorum: {analysis.analysis.positive_comments}</p>
+              <p>😞 Negatif Yorum: {analysis.analysis.negative_comments}</p>
+              <p>📈 Pozitif Oran: {(analysis.analysis.positive_ratio * 100).toFixed(1)}%</p>
+            </div>
+            <div className="keywords-section">
+              <h5>🔑 Anahtar Kelimeler:</h5>
+              <div className="keywords-list">
+                {analysis.analysis.keywords.map((kw, index) => (
+                  <span key={index} className="keyword-tag">
+                    {kw.word} ({kw.count})
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+        
+        {analysis && analysis.status === "error" && (
+          <div className="error-message">
+            ❌ {analysis.message}
+          </div>
+        )}
+        
+        {analysis && analysis.status === "warning" && (
+          <div className="warning-message">
+            ⚠️ {analysis.message}
+          </div>
+        )}
         
         {/* Yorum ekleme formu */}
         <form onSubmit={handleCommentSubmit} className="comment-form">
@@ -148,21 +207,11 @@ const MovieDetails = () => {
           {comments.length > 0 ? (
             comments.map((comment) => (
               <li key={comment.id} className="comment-item">
-                <div className="comment-content">
-                  <strong>{comment.username || "Bilinmeyen Kullanıcı"}:</strong>{" "}
-                  {comment.comment}
-                  <span className="comment-date">
-                    {new Date(comment.created_at).toLocaleDateString("tr-TR")}
-                  </span>
-                  {isAdmin && (
-                    <button 
-                      onClick={() => handleDeleteComment(comment.id)}
-                      className="delete-comment-btn"
-                    >
-                      Sil
-                    </button>
-                  )}
-                </div>
+                <strong>{comment.username || "Bilinmeyen Kullanıcı"}:</strong>{" "}
+                {comment.comment}
+                <span className="comment-date">
+                  {new Date(comment.created_at).toLocaleDateString("tr-TR")}
+                </span>
               </li>
             ))
           ) : (
@@ -175,3 +224,4 @@ const MovieDetails = () => {
 };
 
 export default MovieDetails;
+
