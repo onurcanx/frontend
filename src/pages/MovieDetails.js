@@ -22,7 +22,7 @@ const MovieDetails = () => {
 
   const checkAdminStatus = async () => {
     try {
-      const response = await axios.get(process.env.REACT_APP_API_URL +/api/auth/user/${user_id});
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/auth/user/${user_id}`);
       setIsAdmin(response.data.is_admin);
     } catch (error) {
       console.error("Admin durumu kontrol edilirken hata:", error);
