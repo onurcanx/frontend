@@ -58,7 +58,7 @@ const MovieDetails = () => {
   const analyzeComments = async () => {
     setIsAnalyzing(true);
     try {
-      const response = await axios.get(`http://localhost:5000/auth/comments/analyze/${id}`);
+      const response = await axios.get(process.env.REACT_APP_API_URL +`/api/comments/analyze/${id}`);
       setAnalysis(response.data);
       console.log("✅ Analiz sonuçları:", response.data);
     } catch (error) {
