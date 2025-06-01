@@ -71,89 +71,10 @@
   min-width: 0;
 }
 
-.comments-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.comments-header h3 {
+.comments-section h3 {
   color: rgb(0, 240, 255);
   font-size: 1.3rem;
-  margin: 0;
-}
-
-.analyze-btn {
-  background-color: rgb(0, 240, 255);
-  color: #1a2a2f;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.analyze-btn:hover:not(:disabled) {
-  background-color: rgb(0, 200, 255);
-  transform: translateY(-2px);
-}
-
-.analyze-btn:disabled {
-  background-color: #666;
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
-/* Analiz sonuçları */
-.analysis-results {
-  background: #162126;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.analysis-results h4 {
-  color: rgb(0, 240, 255);
-  font-size: 1.2rem;
-  margin: 0 0 15px 0;
-}
-
-.analysis-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-.analysis-stats p {
-  margin: 0;
-  font-size: 1rem;
-  color: #fff;
-}
-
-.keywords-section h5 {
-  color: rgb(0, 240, 255);
-  font-size: 1.1rem;
-  margin: 0 0 10px 0;
-}
-
-.keywords-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.keyword-tag {
-  background: rgba(0, 240, 255, 0.1);
-  color: rgb(0, 240, 255);
-  padding: 5px 10px;
-  border-radius: 15px;
-  font-size: 0.9rem;
-  border: 1px solid rgba(0, 240, 255, 0.3);
+  margin-bottom: 18px;
 }
 
 .comment-form {
@@ -275,9 +196,6 @@
     width: 100%;
     min-width: 0;
   }
-  .analysis-stats {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 600px) {
@@ -293,13 +211,5 @@
   }
   .comments-section {
     padding: 12px 4px 8px 4px;
-  }
-  .comments-header {
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
-  }
-  .analyze-btn {
-    width: 100%;
   }
 } 
