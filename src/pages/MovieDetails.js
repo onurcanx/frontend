@@ -22,7 +22,7 @@ const MovieDetails = () => {
 
   const checkAdminStatus = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/auth/user/${user_id}`);
+      const response = await axios.get(process.env.REACT_APP_API_URL + `/api/auth/user/${user_id}`);
       setIsAdmin(response.data.is_admin);
     } catch (error) {
       console.error("Admin durumu kontrol edilirken hata:", error);
@@ -33,7 +33,7 @@ const MovieDetails = () => {
   const fetchMovieDetails = async () => {
     try {
       const response = await axios.get(
-        https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=tr-TR
+        `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=tr-TR`
       );
       setMovie(response.data);
     } catch (error) {
@@ -46,7 +46,7 @@ const MovieDetails = () => {
     console.log("ℹ️ Fetching comments for movie ID:", id); // ID'nin doğru gidip gitmediğini kontrol et
 
     try {
-      const response = await axios.get(process.env.REACT_APP_API_URL + /api/auth/comments/${id});
+      const response = await axios.get(process.env.REACT_APP_API_URL + `/api/auth/comments/${id}`);
       setComments(response.data);
     } catch (error) {
       console.error("❌ Yorumlar alınırken hata oluştu:", error);
@@ -86,7 +86,7 @@ const MovieDetails = () => {
   const handleDeleteComment = async (commentId) => {
     try {
       const response = await axios.delete(
-        ${process.env.REACT_APP_API_URL}/api/auth/comments/${commentId},
+        `${process.env.REACT_APP_API_URL}/api/auth/comments/${commentId}`,
         { data: { user_id: user_id } }
       );
 
@@ -109,7 +109,7 @@ const MovieDetails = () => {
       {/* Sol taraf: Film bilgileri */}
       <div className="movie-info">
         <img
-          src={https://image.tmdb.org/t/p/w500${movie.poster_path}}
+          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
           alt={movie.title}
           className="movie-poster-large"
         />
