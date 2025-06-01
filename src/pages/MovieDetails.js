@@ -13,6 +13,8 @@ const MovieDetails = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [error, setError] = useState("");
+  const [analysis, setAnalysis] = useState(null); // Analiz sonuçları için state
+  const [isAnalyzing, setIsAnalyzing] = useState(false); // Analiz durumu için state
 
   useEffect(() => {
     fetchMovieDetails();
@@ -53,6 +55,19 @@ const MovieDetails = () => {
     }
   };
 
+    const analyzeComments = async () => {
+    setIsAnalyzing(true);
+    try {
+      const response = await axios.get(`http://localhost:5000/auth/comments/analyze/${id}`);
+      setAnalysis(response.data);
+      console.log("✅ Analiz sonuçları:", response.data);
+    } catch (error) {
+      console.error("❌ Analiz sırasında hata:", error);
+      setError("Yorum analizi sırasında bir hata oluştu.");
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     
@@ -143,6 +158,40 @@ const MovieDetails = () => {
           </button>
         </form>
 
+        {/* Analiz sonuçları */}
+        {analysis && analysis.status === "success" && analysis.analysis && (
+          <div className="analysis-results">
+            <h4>📊 Yorum Analizi</h4>
+            <div className="analysis-stats">
+              <p>📝 Toplam Yorum: {analysis.analysis.total_comments}</p>
+              <p>😊 Pozitif Yorum: {analysis.analysis.positive_comments}</p>
+              <p>😞 Negatif Yorum: {analysis.analysis.negative_comments}</p>
+              <p>📈 Pozitif Oran: {(analysis.analysis.positive_ratio * 100).toFixed(1)}%</p>
+            </div>
+            <div className="keywords-section">
+              <h5>🔑 Anahtar Kelimeler:</h5>
+              <div className="keywords-list">
+                {analysis.analysis.keywords.map((kw, index) => (
+                  <span key={index} className="keyword-tag">
+                    {kw.word} ({kw.count})
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+        
+        {analysis && analysis.status === "error" && (
+          <div className="error-message">
+            ❌ {analysis.message}
+          </div>
+        )}
+        
+        {analysis && analysis.status === "warning" && (
+          <div className="warning-message">
+            ⚠️ {analysis.message}
+          </div>
+        )}        
         {/* Yorumlar listesi */}
         <ul className="comments-list">
           {comments.length > 0 ? (
